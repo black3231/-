@@ -1,0 +1,6 @@
+{
+  "name": "끝말잇기 AI (표준국어대사전 & 두음법칙)",
+  "description": "두음법칙과 한방단어 설정이 지원되는 표준국어대사전 기반 끝말잇기 AI 대전 게임. 10초 제한시간과 실시간 사전 검색을 지원합니다.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
