@@ -234,7 +234,6 @@ export async function getAIMove(
       c.category === '끝말잇기방어' || 
       c.word === '듐차' || 
       c.word === '차풰' || 
-      c.word === '풰이크' || 
       c.word === '졀고공이' || 
       c.word === '쁨나무' ||
       c.word === '슘페터' ||

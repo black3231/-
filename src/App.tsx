@@ -353,16 +353,7 @@ export default function App() {
     setErrorMessage(null);
 
     // AI 고민 시간 연출
-    const thinkTime =
-      settings.difficulty === 'easy'
-        ? 1800
-        : settings.difficulty === 'mid'
-        ? 1400
-        : settings.difficulty === 'hard'
-        ? 1100
-        : settings.difficulty === 'master'
-        ? 800
-        : 500; // Lv.5 God: 초신속 절대 계산
+    const thinkTime = 1000; // 모든 난이도에서 1초 후 응답
 
     const timer = setTimeout(async () => {
       const move = await getAIMove(latestWordItem.word, usedWords, settings);

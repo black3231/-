@@ -3,9 +3,6 @@ import { canChainWords, formatStartingRule } from '../utils/dueum';
 import { isOneShotWord, getOneShotDescription } from '../utils/oneShotWords';
 import { WordCheckResult } from '../types/game';
 
-// 런타임에 동적으로 학습/확인된 추가 단어 캐시
-const DYNAMIC_WORD_CACHE = new Map<string, { definition: string; hanja?: string; category?: string }>();
-
 /**
  * 단어 유효성 검사 (규칙 + 표준국어대사전 검증)
  */
@@ -80,19 +77,7 @@ export async function validateWord(
     };
   }
 
-  // 6-2. 동적 캐시 확인
-  if (DYNAMIC_WORD_CACHE.has(trimmed)) {
-    const cached = DYNAMIC_WORD_CACHE.get(trimmed)!;
-    return {
-      isValid: true,
-      definition: cached.definition,
-      hanja: cached.hanja,
-      category: cached.category,
-      isOneShot,
-    };
-  }
-
-  // 6-3. 서버 표준국어대사전 Gemini API 검증 시도
+  // 6-2. 서버 표준국어대사전 Gemini API 검증 시도
   try {
     const response = await fetch('/api/check-word', {
       method: 'POST',
@@ -107,15 +92,9 @@ export async function validateWord(
     if (response.ok) {
       const data = await response.json();
       if (data.isValid) {
-        DYNAMIC_WORD_CACHE.set(trimmed, {
-          definition: data.definition || "표준국어대사전 등재 명사",
-          hanja: data.hanja,
-          category: data.category || "일반어",
-        });
-
         return {
           isValid: true,
-          definition: data.definition || "표준국어대사전에 등재된 단어입니다.",
+          definition: data.definition || "표준국어대사전 등재 명사",
           hanja: data.hanja,
           category: data.category || "일반어",
           isOneShot,
@@ -128,7 +107,7 @@ export async function validateWord(
       }
     }
   } catch {
-    // 백엔드 통신 실패 시 (오프라인 등): 로컬 사전 외 단어는 안내
+    // 백엔드 통신 실패 시: 오프라인 모드에서는 사전 내 단어만 허용
   }
 
   return {
@@ -148,9 +127,6 @@ export function lookupWordDefinition(word: string): { definition: string; hanja?
       hanja: entry.hanja,
       category: entry.category,
     };
-  }
-  if (DYNAMIC_WORD_CACHE.has(word)) {
-    return DYNAMIC_WORD_CACHE.get(word)!;
   }
   return null;
 }

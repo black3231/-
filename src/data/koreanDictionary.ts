@@ -729,6 +729,9 @@ export const KOREAN_DICTIONARY: DictionaryEntry[] = [
   { word: "양자역학", definition: "원자나 전자 등 미시 세계의 물질과 에너지 거동을 설명하는 현대 물리학의 한 축.", category: "과학", hanja: "量子力學", difficulty: "hard" },
   { word: "상대성이론", definition: "아인슈타인이 제창한 시간, 공간, 중력에 관한 현대 물리학 이론.", category: "과학", hanja: "相對性理論", difficulty: "hard" },
   { word: "인공지능", definition: "인간의 학습 능력과 추론 능력, 지각 능력을 인공적으로 구현한 컴퓨터 과학 기술.", category: "과학", hanja: "人工知能", difficulty: "easy" },
+  { word: "천체물리학", definition: "천체의 물리적 성질과 우주의 진화를 연구하는 천문학의 한 분야.", category: "과학", hanja: "天體物理學", difficulty: "hard" },
+  { word: "지능정보사회", definition: "인공지능과 정보통신기술이 융합되어 사회 전반에 지능 정보 서비스가 확산되는 사회.", category: "사회", hanja: "知能情報社會", difficulty: "normal" },
+  { word: "지속가능개발", definition: "미래 세대의 필요를 저해하지 않으면서 현 세대의 필요를 충족시키는 개발.", category: "경제", hanja: "持續可能開發", difficulty: "normal" },
 ];
 
 // 빠른 검색을 위한 Map 및 인덱스 구성
